@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    container_name: postgres-container
+    environment:
+      POSTGRES_DB: "billing-api-db"
+      POSTGRES_USER: "thiago"
+      POSTGRES_PASSWORD: "queroedu"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./data/postgres:/var/lib/postgresql/data" 
+    networks:
+      - compose-network
+      
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: "pgadmin-container"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "thiago@redealumni.com"
+      PGADMIN_DEFAULT_PASSWORD: "queroedu"
+    ports:
+      - "15432:80"
+    depends_on:
+      - db
+    networks:
+      - compose-network
+
+  rails:
+    build: .
+    container_name: "rails-container"
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/billing-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - compose-network
+
+networks: 
+  compose-network:
+    driver: bridge

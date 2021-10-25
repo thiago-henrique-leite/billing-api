@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  institution: one
+  student: one
+  enrollment_semester: MyString
+  course_name: MyString
+  amount_bills: 1
+  due_day: 1
+  total_value: 9.99
+  discount_percentage: 9.99
+  enabled: false
+
+two:
+  institution: two
+  student: two
+  enrollment_semester: MyString
+  course_name: MyString
+  amount_bills: 1
+  due_day: 1
+  total_value: 9.99
+  discount_percentage: 9.99
+  enabled: false
